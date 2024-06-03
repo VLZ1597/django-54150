@@ -4,10 +4,14 @@ from datetime import datetime
 from django.http import HttpResponse
 from django.template import Template, Context, loader
 
+from inicio.models import Auto
+
 import random
 
 def inicio(request):
-    return HttpResponse('Bienvenido a mi INICIO!!')
+    # v1
+    # return HttpResponse('Bienvenido a mi INICIO!!')
+    return render(request, 'inicio/index.html')
 
 def template1(request, nombre, apellido, edad):
     fecha = datetime.now()
@@ -74,3 +78,8 @@ def probando(request):
     numeros = random.choices(lista, k=50)
     print(numeros)
     return render(request,'probando_if_for.html', {'numeros': numeros})
+
+def auto(request, marca, modelo):
+    auto = Auto(marca=marca, modelo=modelo)
+    auto.save()
+    return render(request,'auto_templates/creacion.html', {"auto": auto})
