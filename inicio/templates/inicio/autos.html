@@ -9,11 +9,21 @@ LISTADO DE AUTOS
 {% endblock h1_header %}
 
 {% block main %}
+<a href={% url "crear_auto" %}>Crear Auto</a>
+<form action={% url "autos" %} method="get">
+    {{formulario}}
+    <input type="submit" value='Buscar'>
+</form>
+
 
 {% if autos %}
     <ul>
         {% for auto in autos  %}
-        <li> {{auto}} </li>
+        <li> {{auto}} | 
+            <a href= {% url "eliminar_auto" auto.id%}>Eliminar</a> |
+            <a href= {% url "editar_auto" auto.id%}>Editar</a> |
+            <a href= {% url "ver_auto" auto.id%}>Ver</a> |
+        </li>
         {% endfor %}
     
     </ul>
